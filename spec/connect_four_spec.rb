@@ -96,4 +96,50 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#apply_move' do
+    before do
+      allow(game).to receive(:print_welcome)
+      allow(game).to receive(:get_input).and_return(0)
+      allow(game).to receive(:print_state)
+      allow(game).to receive(:print_conclusion)
+      allow(game).to receive(:winner?).and_return(true)
+    end
+
+    it 'applies move correctly if player is 1' do
+      game.play
+      expect(game.board).to eql([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' ', ' ']])
+    end
+
+    it 'applies move correctly if player is 2' do
+      allow(game).to receive(:player).and_return(2)
+      game.play
+      expect(game.board).to eql([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                 [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' ']])
+    end
+
+    it 'applies consecutive moves correctly' do
+        allow(game).to receive(:player).and_return(1)
+        game.play
+        allow(game).to receive(:player).and_return(2)
+        game.play
+        allow(game).to receive(:player).and_return(1)
+        game.play
+        expect(game.board).to eql([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' ', ' ']])
+    end
+  end
 end
