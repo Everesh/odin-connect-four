@@ -21,11 +21,11 @@ describe ConnectFour do
         expect(game.board).to be_an Array
       end
 
-      it "has #{described_class::BOARD_HEIGHT} rows" do
+      it "has BOARD_HEIGHT rows" do
         expect(described_class::BOARD_HEIGHT).to eql(game.board.length)
       end
 
-      it "has #{described_class::BOARD_WIDTH} columns" do
+      it "has BOARD_WIDTH columns" do
         expect(game.board).to all(have_attributes(length: described_class::BOARD_WIDTH))
       end
     end
