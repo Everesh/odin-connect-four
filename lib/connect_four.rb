@@ -67,6 +67,23 @@ class ConnectFour
   end
 
   def winner?
+    sequences = board + board.transpose + diagonals
+    sequences.any? { |sequence| sequence.join.match?(/#{PLAYER_ONE}{4}|#{PLAYER_TWO}{4}/) }
+  end
+
+  def diagonals
+    diagonals = []
+    rows = board.size
+    cols = board[0].size
+
+    (0...rows).each do |i|
+      (0...cols).each do |j|
+        diagonals << (0..3).map { |k| board[i + k][j + k] } if i + 3 < rows && j + 3 < cols
+        diagonals << (0..3).map { |k| board[i + k][j - k] } if i + 3 < rows && j - 3 >= 0
+      end
+    end
+
+    diagonals
   end
 
   def print_conclusion
