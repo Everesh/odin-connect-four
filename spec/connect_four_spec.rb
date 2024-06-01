@@ -160,4 +160,23 @@ describe ConnectFour do
                                     described_class::PLAYER_ONE, ' ', ' ', ' ', ' ']])
     end
   end
+
+  describe '#get_input' do
+    before do
+      allow(game).to receive(:print_welcome)
+      allow(game).to receive(:print_state)
+      allow(game).to receive(:print_conclusion)
+      allow(game).to receive(:winner?).and_return(true)
+    end
+
+    it 'accpets valid input' do
+      allow(game).to receive(:gets).and_return("1\n")
+      expect(game.send(:get_input)).to eq(0)
+    end
+
+    it 'refuses invalids inputs until valid is provided' do
+        allow(game).to receive(:gets).and_return("8\n", "0\n", "3\n" )
+        expect(game.send(:get_input)).to eq(2)
+    end
+  end
 end
