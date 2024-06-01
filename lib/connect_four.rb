@@ -41,6 +41,15 @@ class ConnectFour
   end
 
   def print_state
+    line = '+'
+    board[0].length.times { line.concat('---+') }
+    puts line
+    board.each.with_index do |_row, index|
+      print '|'
+      board[index].each { |item| print " #{item} |" }
+      puts
+      puts line
+    end
   end
 
   def winner?
