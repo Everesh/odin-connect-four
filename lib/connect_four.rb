@@ -56,5 +56,9 @@ class ConnectFour
   end
 
   def print_conclusion
+    puts '  .__.'
+    puts ' (|  |)'
+    puts '  (  )'
+    puts "  _)(_  Player#{player} WON!"
   end
 end
