@@ -97,6 +97,7 @@ describe ConnectFour do
     end
   end
 
+  # These tests might break with changes to BOARD_WIDTH and BOARD_HEIGHT
   describe '#apply_move' do
     before do
       allow(game).to receive(:print_welcome)
