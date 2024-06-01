@@ -127,7 +127,7 @@ describe ConnectFour do
                                  [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' ']])
     end
 
-    it 'applies consecutive moves correctly' do
+    it 'applies moves in column correctly' do
         allow(game).to receive(:player).and_return(1)
         game.play
         allow(game).to receive(:player).and_return(2)
@@ -140,6 +140,24 @@ describe ConnectFour do
                                    [described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' ', ' '],
                                    [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' '],
                                    [described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' ', ' ']])
+    end
+    it 'applies moves in row correctly' do
+        allow(game).to receive(:player).and_return(1)
+        allow(game).to receive(:get_input).and_return(0)
+        game.play
+        allow(game).to receive(:player).and_return(2)
+        allow(game).to receive(:get_input).and_return(1)
+        game.play
+        allow(game).to receive(:player).and_return(1)
+        allow(game).to receive(:get_input).and_return(2)
+        game.play
+        expect(game.board).to eql([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                   [described_class::PLAYER_ONE, described_class::PLAYER_TWO,
+                                    described_class::PLAYER_ONE, ' ', ' ', ' ', ' ']])
     end
   end
 end
