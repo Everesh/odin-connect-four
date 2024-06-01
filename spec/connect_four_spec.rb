@@ -36,11 +36,11 @@ describe ConnectFour do
 
     describe 'player' do
       it 'has attr_reader method' do
-        expect(game).not_to respond_to(:player)
+        expect(game).to respond_to(:player)
       end
 
-      it 'has a private attr_accessor method' do
-        expect(game.private_methods).to include(:player).and include(:player=)
+      it 'has a private attr_writer method' do
+        expect(game.private_methods).to include(:player=)
       end
 
       it 'is an integer' do

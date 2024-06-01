@@ -2,7 +2,7 @@ class ConnectFour
   BOARD_WIDTH = 7
   BOARD_HEIGHT = 6
 
-  attr_reader :board
+  attr_reader :board, :player
 
   def initialize
     @board = Array.new(BOARD_HEIGHT) { Array.new(BOARD_WIDTH) { ' ' } }
@@ -11,6 +11,5 @@ class ConnectFour
 
   private
 
-  attr_writer :board
-  attr_accessor :player
+  attr_writer :board, :player
 end
