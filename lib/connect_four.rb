@@ -35,6 +35,9 @@ class ConnectFour
   end
 
   def apply_move(column)
+    depth = BOARD_HEIGHT - 1
+    depth -= 1 until board[depth][column] == ' '
+    board[depth][column] = player == 1 ? PLAYER_ONE : PLAYER_TWO
   end
 
   def get_input
