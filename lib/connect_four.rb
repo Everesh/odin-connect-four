@@ -47,6 +47,10 @@ class ConnectFour
     begin
       input = gets.chr.to_i
       raise StandardError if input > BOARD_WIDTH || input < 1
+      raise ArgumentError if board[0][input - 1] != ' '
+    rescue ArgumentError
+      puts '### Column is full, try again!'
+      retry
     rescue StandardError
       puts '### Invalid input, try again!'
       retry
