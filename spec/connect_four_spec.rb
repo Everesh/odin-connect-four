@@ -237,8 +237,10 @@ describe ConnectFour do
   describe 'Full game test' do
     context 'winning series for player 1' do
       before do
+        allow(game).to receive(:print_state)
+        allow(game).to receive(:print_welcome)
+        allow(game).to receive(:print_conclusion)
         allow(game).to receive(:get_input).and_return(0,1,0,2,0,3,0)
-        allow(game).to receive(:print_conclusion).and_call_original
         game.play
       end
 
@@ -253,8 +255,10 @@ describe ConnectFour do
 
     context 'winning series for player 2' do
         before do
+          allow(game).to receive(:print_state)
+          allow(game).to receive(:print_welcome)
+          allow(game).to receive(:print_conclusion)
           allow(game).to receive(:get_input).and_return(0,1,1,2,0,3,0,4)
-          allow(game).to receive(:print_conclusion).and_call_original
           game.play
         end
   
@@ -262,7 +266,7 @@ describe ConnectFour do
           expect(game).to have_received(:print_conclusion).once
         end
   
-        it 'declared player 1 as a winner' do
+        it 'declared player 2 as a winner' do
           expect(game.player).to eq(2)
         end
       end
