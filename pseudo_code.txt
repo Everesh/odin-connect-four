@@ -1,0 +1,23 @@
+class ConnectFour
+    initialize
+        create the game board
+    end
+
+    play
+        take input until valid
+        if odd round
+            apply move as player 1
+        else
+            apply move as player 2
+        end
+        print state
+        winner? ? conclude_game : play
+    end
+
+    conclude_game
+        winner = odd round number ? player 1 : player 2
+        print player #{winner} won
+        promt for rematch
+    end
+
+end
