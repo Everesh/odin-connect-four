@@ -13,6 +13,10 @@ describe ConnectFour do
         expect(game).to respond_to(:board)
       end
 
+      it 'has a private attr_reader method' do
+        expect(game.private_methods).to include(:board=)
+      end
+
       it 'is an array' do
         expect(game.board).to be_an Array
       end
