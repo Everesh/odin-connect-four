@@ -180,4 +180,57 @@ describe ConnectFour do
         expect(game.send(:get_input)).to eq(2)
     end
   end
+
+  describe '#winner?' do
+    it 'true if 4 in row' do
+        allow(game).to receive(:board).and_return([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [described_class::PLAYER_ONE, described_class::PLAYER_ONE,
+                                                    described_class::PLAYER_ONE, described_class::PLAYER_ONE, ' ', ' ', ' ']])
+        expect(game.send(:winner?)).to be true
+    end
+
+    it 'true if 4 in column' do
+        allow(game).to receive(:board).and_return([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [described_class::PLAYER_TWO, ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' ']])
+        expect(game.send(:winner?)).to be true
+    end
+
+    it 'true if 4 in diagonal' do
+        allow(game).to receive(:board).and_return([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', described_class::PLAYER_ONE, ' ', ' ', ' '],
+                                                   [' ', ' ', described_class::PLAYER_ONE, ' ', ' ', ' ', ' '],
+                                                   [' ', described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' '],
+                                                   [described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' ', ' ']])
+        expect(game.send(:winner?)).to be true
+    end
+
+    it 'false if all empty' do
+        allow(game).to receive(:board).and_return([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' ']])
+        expect(game.send(:winner?)).not_to be true
+    end
+
+    it 'false if no 4 next to each other' do
+        allow(game).to receive(:board).and_return([[' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', described_class::PLAYER_ONE, ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', described_class::PLAYER_ONE, ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                                                   [' ', ' ', ' ', ' ', ' ', described_class::PLAYER_TWO, ' '],
+                                                   [' ', ' ', described_class::PLAYER_TWO, ' ', ' ', ' ', ' ']])
+        expect(game.send(:winner?)).not_to be true
+    end
+  end
 end
