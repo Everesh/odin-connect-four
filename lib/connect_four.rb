@@ -1,6 +1,8 @@
 class ConnectFour
   BOARD_WIDTH = 7
   BOARD_HEIGHT = 6
+  PLAYER_ONE = 'X'.freeze
+  PLAYER_TWO = 'O'.freeze
 
   attr_reader :board, :player
 
