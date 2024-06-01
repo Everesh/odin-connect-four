@@ -43,6 +43,15 @@ class ConnectFour
   end
 
   def get_input
+    puts "Player#{player}, give me a number 1 - #{BOARD_WIDTH}:"
+    begin
+      input = gets.chr.to_i
+      raise StandardError if input > BOARD_WIDTH || input < 1
+    rescue StandardError
+      puts '### Invalid input, try again!'
+      retry
+    end
+    input - 1
   end
 
   def print_state
