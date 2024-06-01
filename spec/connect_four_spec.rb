@@ -53,4 +53,43 @@ describe ConnectFour do
     end
   end
 
+  describe '#play' do
+    describe 'of 7 turns' do
+      before do
+        allow(game).to receive(:print_welcome)
+        allow(game).to receive(:apply_move)
+        allow(game).to receive(:get_input).and_return(1, 2, 1, 3, 1, 5, 1)
+        allow(game).to receive(:print_state)
+        allow(game).to receive(:winner?).and_return(false, false, false, false, false, false, true)
+        allow(game).to receive(:print_conclusion)
+        allow(game).to receive(:player=).and_call_original
+        game.play
+      end
+
+      it 'prints welcome message' do
+        expect(game).to have_received(:print_welcome)
+      end
+
+      it 'asks for inputs' do
+        expect(game).to have_received(:get_input).at_least(:twice)
+      end
+
+      it 'applies moves' do
+        expect(game).to have_received(:apply_move).at_least(:twice)
+      end
+
+      it 'prints states' do
+        expect(game).to have_received(:print_state).at_least(:twice)
+      end
+
+      it 'asks about winner' do
+        expect(game).to have_received(:winner?).at_least(:twice)
+      end
+
+      it 'switched players' do
+        expect(game).to have_received(:player=).with(2).at_least(:once)
+        expect(game).to have_received(:player=).with(1).at_least(:once)
+      end
+    end
+  end
 end
