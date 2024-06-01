@@ -28,6 +28,10 @@ describe ConnectFour do
       it "has BOARD_WIDTH columns" do
         expect(game.board).to all(have_attributes(length: described_class::BOARD_WIDTH))
       end
+
+      it "is filled with ' '" do
+        expect(game.board.flatten.all?(' ')).to be true
+      end
     end
 
     it 'creates a instance variable called player' do
