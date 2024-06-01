@@ -26,6 +26,12 @@ class ConnectFour
   attr_writer :board, :player
 
   def print_welcome
+    puts ' .--.                               .-.   .---.               '
+    puts ": .--'                             .' `.  : .--'              "
+    puts ": :    .--. ,-.,-.,-.,-. .--.  .--.`. .'  : `;.--. .-..-..--. "
+    puts ": :__ ' .; :: ,. :: ,. :' '_.''  ..': :   : :' .; :: :; :: ..'"
+    puts "`.__.'`.__.':_;:_;:_;:_;`.__.'`.__.':_;   :_;`.__.'`.__.':_;  "
+    puts
   end
 
   def apply_move(column)
