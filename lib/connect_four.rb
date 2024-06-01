@@ -6,9 +6,11 @@ class ConnectFour
 
   def initialize
     @board = Array.new(BOARD_HEIGHT) { Array.new(BOARD_WIDTH) { ' ' } }
+    @player = 1
   end
 
   private
 
   attr_writer :board
+  attr_accessor :player
 end
