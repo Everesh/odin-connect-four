@@ -16,11 +16,11 @@ class ConnectFour
     loop do
       apply_move(get_input)
       print_state
-      break if winner?
+      break if winner? || board[0].all? { |position| position != ' ' }
 
       self.player = player == 1 ? 2 : 1
     end
-    print_conclusion
+    board[0].all? { |position| position != ' ' } ? print_draw : print_conclusion
   end
 
   private
@@ -95,5 +95,9 @@ class ConnectFour
     puts ' (|  |)'
     puts '  (  )'
     puts "  _)(_  Player#{player} WON!"
+  end
+
+  def print_draw
+    puts 'Its a DRAW!'
   end
 end
